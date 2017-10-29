@@ -19,8 +19,8 @@ class NotesController < ApplicationController
     @urlsafe=SecureRandom.urlsafe_base64(32)
     @note = Note.new({msg: params[:content], slug: @urlsafe})
     @note.save
-    domain=request.domain
-    @url="www."+ domain +"/view/"+ @note.slug 
+    domain=request.base_url
+    @url=domain +"/view/"+ @note.slug 
     @action="/view/"+ @note.slug 
     render "link_info" 
   end
