@@ -1,1 +1,4 @@
-<p>Your note is on address: /view/<%= @note.slug %></p>
+
+
+
+<p>Your note is on address:<%= link_to @url, @action, {class: 'button'} %>
