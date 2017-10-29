@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="main.css">
+<div id="bg">
+    <div class="module">
+    <%= form_tag '/register', {class: 'form'} do %>
+        <p> Register</p>
+        <%= text_field_tag 'username',nil, :class=> 'textbox', :placeholder=> "Username" %>
+        <br>
+        <%= password_field_tag 'password',nil, :class=> 'textbox', :placeholder=> "Password" %>
+        <br>
+        <%= text_field_tag 'email' ,nil,:class=> 'textbox', :placeholder=> "Email" %>
+        <%= link_to "Login", '/login', {class: 'button'} %>
+        <%= submit_tag "Register",{class: 'button'} %>
+    <% end %>
+    </div>
+</div>    
+
+
+
