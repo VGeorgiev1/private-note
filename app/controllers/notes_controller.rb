@@ -1,7 +1,5 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  # GET /notes/1
-  # GET /notes/1.json
   def view
     @note = Note.find_by slug: params[:id];
     if @note!=nil
@@ -13,7 +11,11 @@ class NotesController < ApplicationController
 
     render "note_info"
   end
-
+  def api
+    note = params[:file].read
+    note = JSON.parse note
+    p note
+  end
   # GET /notes/new
   def new
     @urlsafe=SecureRandom.urlsafe_base64(32)
