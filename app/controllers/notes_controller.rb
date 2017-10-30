@@ -12,9 +12,11 @@ class NotesController < ApplicationController
     render "note_info"
   end
   def api
-    note = params[:file].read
-    note = JSON.parse note
-    p note
+    urlsafe=SecureRandom.urlsafe_base64(32);
+    @note=Note.new({msg:params[:message], slug: urlsafe})
+    respond_to |format|
+      format.json {render : json => @note}
+    end
   end
   # GET /notes/new
   def new
