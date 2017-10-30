@@ -15,7 +15,7 @@ class NotesController < ApplicationController
     urlsafe=SecureRandom.urlsafe_base64(32);
     @note=Note.new({msg:params[:message], slug: urlsafe})
     respond_to |format|
-      format.json {render : json => @note}
+    format.json {render json: @note}
     end
   end
   # GET /notes/new
