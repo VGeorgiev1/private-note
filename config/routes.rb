@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post '/register' => 'users#new'
   get '/login' => 'users#loginGet'
   post '/login' => 'users#loginPost'
+  post '/notes/api' => 'notes#api'
 end
