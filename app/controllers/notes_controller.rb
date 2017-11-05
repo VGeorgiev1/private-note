@@ -13,11 +13,23 @@ class NotesController < ApplicationController
   end
   def api
     urlsafe=SecureRandom.urlsafe_base64(32);
+    p params
+    res='json'
+    if request.content_type =~ /xml/
+      params[:message]=Nokogiri::XML(request.body.read).xpath('//message').children[0].to_s
+      res='xml'
+    end
     note=Note.new({msg:params[:message], slug: urlsafe})
     note.save
-    respond_to do |format| 
-      format.json {render json: {'url' => request.base_url+ "/view/"+note.slug}}
-    end
+    if res=='json'
+      respond_to do |format| 
+        format.json {render json: {'url' => request.base_url+ "/view/"+note.slug}}
+      end  
+    else
+      respond_to do |format| 
+        format.xml {render xml: "<?xml version='1.0' encoding='UTF-8'?><url>#{request.base_url+ '/view/'+note.slug}</url>"}
+      end  
+    end  
   end
   # GET /notes/new
   def new
